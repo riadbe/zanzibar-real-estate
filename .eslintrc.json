@@ -1,14 +1,9 @@
-{
+﻿{
   "extends": [
-    "next/core-web-vitals",
-    "next/typescript"
+    "next/core-web-vitals"
   ],
   "rules": {
     "react/no-unescaped-entities": "off",
-    "@next/next/no-img-element": "off",
-    "semi": ["error", "always"],
-    "quotes": ["error", "single"],
-    "indent": ["error", 2],
-    "comma-dangle": ["error", "always-multiline"]
+    "@next/next/no-img-element": "off"
   }
 }

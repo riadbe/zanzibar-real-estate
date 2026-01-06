@@ -17,7 +17,7 @@ export default async function handler(
   }
 
   try {
-    const { userId, propertyId, date, message } = req.body;
+    const { userId, propertyId, date } = req.body;
 
     if (!userId || !propertyId || !date) {
       return res.status(400).json({ error: 'Missing required fields' });

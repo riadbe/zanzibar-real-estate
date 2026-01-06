@@ -29,9 +29,9 @@ export default function Navbar() {
             <Link href="/properties" className="hover:text-secondary transition">
               Propriétés
             </Link>
-             <Link href="/virtual-tours" className="hover:text-secondary transition">
-               Visites 360°
-             </Link>
+            <Link href="/virtual-tours" className="hover:text-secondary transition">
+              Visites 360°
+            </Link>
             <Link href="/about" className="hover:text-secondary transition">
               À Propos
             </Link>
@@ -74,9 +74,9 @@ export default function Navbar() {
             <Link href="/properties" className="block hover:text-secondary transition">
               Propriétés
             </Link>
-             <Link href="/virtual-tours" className="block hover:text-secondary transition">
-               Visites 360°
-             </Link>
+            <Link href="/virtual-tours" className="block hover:text-secondary transition">
+              Visites 360°
+            </Link>
             <Link href="/about" className="block hover:text-secondary transition">
               À Propos
             </Link>

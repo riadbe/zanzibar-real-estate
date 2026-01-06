@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 type ResponseData = {
   success?: boolean;
-  properties?: any[];
+  properties?: object[];
   error?: string;
 };
 

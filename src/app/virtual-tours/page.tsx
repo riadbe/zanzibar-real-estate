@@ -51,7 +51,6 @@ const tours: VirtualTour[] = [
 
 export default function VirtualToursPage() {
   const [selectedTour, setSelectedTour] = useState<VirtualTour | null>(null);
-  const [showMap, setShowMap] = useState(false);
 
   return (
     <div className="min-h-screen bg-white">
@@ -74,7 +73,6 @@ export default function VirtualToursPage() {
             Immerse yourself in every corner of our luxury properties with interactive virtual tours
           </p>
           <button
-            onClick={() => setShowMap(true)}
             className="inline-flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition"
           >
             <FaMapMarkerAlt /> View Project Location

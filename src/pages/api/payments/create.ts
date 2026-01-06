@@ -19,7 +19,7 @@ export default async function handler(
   }
 
   try {
-    const { userId, propertyId, amount, currency, type } = req.body;
+    const { userId, propertyId, amount, currency } = req.body;
 
     if (!userId || !propertyId || !amount || !currency) {
       return res.status(400).json({ error: 'Missing required fields' });

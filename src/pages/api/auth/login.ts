@@ -5,7 +5,7 @@ type ResponseData = {
   success?: boolean;
   message?: string;
   token?: string;
-  user?: any;
+  user?: object;
   error?: string;
 };
 

@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 type ResponseData = {
   success?: boolean;
   message?: string;
-  user?: any;
+  user?: object;
   error?: string;
 };
 
@@ -17,7 +17,7 @@ export default async function handler(
   }
 
   try {
-    const { email, password, name, phone } = req.body;
+    const { email, password, name } = req.body;
 
     // Validation
     if (!email || !password || !name) {

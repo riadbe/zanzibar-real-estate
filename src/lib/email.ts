@@ -1,15 +1,5 @@
 // lib/email.ts
-import nodemailer from 'nodemailer';
-
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: false,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD,
-  },
-});
+// Email service - disabled for now
 
 interface EmailOptions {
   to: string;
@@ -18,15 +8,7 @@ interface EmailOptions {
 }
 
 export const sendEmail = async (options: EmailOptions): Promise<void> => {
-  try {
-    await transporter.sendMail({
-      from: process.env.SMTP_USER || 'noreply@zanzibar-realestate.com',
-      ...options,
-    });
-  } catch (error) {
-    console.error('Failed to send email:', error);
-    throw error;
-  }
+  console.log('Email would be sent to:', options.to, 'Subject:', options.subject);
 };
 
 // Email templates

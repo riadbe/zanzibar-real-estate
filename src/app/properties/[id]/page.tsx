@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaBed, FaBath, FaRulerCombined, FaMapMarkerAlt, FaHeart, FaShare2 } from 'react-icons/fa';
+import { FaBed, FaBath, FaRulerCombined, FaMapMarkerAlt, FaHeart } from 'react-icons/fa';
 
 interface PropertyDetailsPageProps {
   params: {
@@ -74,9 +74,6 @@ export default function PropertyDetailsPage({ params }: PropertyDetailsPageProps
               className={`btn ${isFavorite ? 'bg-red-500 text-white' : 'bg-gray-200'}`}
             >
               <FaHeart size={20} />
-            </button>
-            <button className="btn bg-gray-200 hover:bg-gray-300">
-              <FaShare2 size={20} />
             </button>
           </div>
         </div>
