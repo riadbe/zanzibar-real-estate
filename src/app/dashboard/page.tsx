@@ -1,14 +1,24 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FaEdit, FaKey, FaBell } from 'react-icons/fa';
 
 export default function DashboardPage() {
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
   return (
     <div className="space-y-6">
       {/* Welcome Card */}
       <div className="bg-gradient-to-r from-primary to-secondary text-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold mb-2">Bienvenue, Jean!</h1>
+        <h1 className="text-3xl font-bold mb-2">Bienvenue, {user?.name}!</h1>
         <p>Gérez votre compte et accédez à des propriétés exclusives</p>
       </div>
 

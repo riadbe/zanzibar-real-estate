@@ -25,13 +25,32 @@ export default function LoginPage() {
     setLoading(true);
     setError('');
 
-    // TODO: Implémenter l'API d'authentification
-    console.log('Login:', formData);
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-    setTimeout(() => {
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error || 'Erreur de connexion');
+        return;
+      }
+
+      // Save token to localStorage
+      localStorage.setItem('auth_token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+
+      // Redirect to dashboard
+      window.location.href = '/dashboard';
+    } catch (err) {
+      setError('Erreur serveur. Veuillez réessayer.');
+      console.error('Login error:', err);
+    } finally {
       setLoading(false);
-      // window.location.href = '/dashboard';
-    }, 1000);
+    }
   };
 
   return (

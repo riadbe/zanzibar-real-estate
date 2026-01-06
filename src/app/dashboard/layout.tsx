@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FaSignOutAlt, FaHeart, FaCalendar, FaCreditCard, FaUser } from 'react-icons/fa';
 
@@ -9,7 +10,42 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState('overview');
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem('auth_token');
+    const userData = localStorage.getItem('user');
+
+    if (!token) {
+      router.push('/auth/login');
+      return;
+    }
+
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+    setLoading(false);
+  }, [router]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('user');
+    router.push('/');
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+          <p className="mt-4 text-gray-600">Chargement...</p>
+        </div>
+      </div>
+    );
+  }
 
   const menuItems = [
     {
@@ -44,10 +80,10 @@ export default function DashboardLayout({
               {/* User Profile */}
               <div className="text-center mb-6 pb-6 border-b">
                 <div className="w-16 h-16 bg-primary text-white rounded-full mx-auto mb-3 flex items-center justify-center text-2xl">
-                  JD
+                  {user?.name?.substring(0, 2)?.toUpperCase() || 'U'}
                 </div>
-                <h3 className="font-bold">Jean Dupont</h3>
-                <p className="text-sm text-gray-600">jean@email.com</p>
+                <h3 className="font-bold">{user?.name || 'Utilisateur'}</h3>
+                <p className="text-sm text-gray-600">{user?.email}</p>
               </div>
 
               {/* Menu */}
@@ -69,7 +105,10 @@ export default function DashboardLayout({
               </nav>
 
               {/* Logout */}
-              <button className="w-full px-4 py-3 bg-red-500 text-white rounded hover:bg-red-600 transition flex items-center justify-center gap-2">
+              <button 
+                onClick={handleLogout}
+                className="w-full px-4 py-3 bg-red-500 text-white rounded hover:bg-red-600 transition flex items-center justify-center gap-2"
+              >
                 <FaSignOutAlt size={18} />
                 Déconnexion
               </button>
