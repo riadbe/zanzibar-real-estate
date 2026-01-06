@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: zanzibar
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: zanzibar_real_estate
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  # Next.js Application
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://zanzibar:password123@postgres:5432/zanzibar_real_estate
+      REDIS_URL: redis://redis:6379
+      NODE_ENV: development
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+volumes:
+  postgres_data:
