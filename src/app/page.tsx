@@ -1,9 +1,17 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { FaArrowRight, FaVideo, FaMapMarkerAlt } from 'react-icons/fa';
+import dynamic from 'next/dynamic';
+import { FaArrowRight, FaVideo, FaCube } from 'react-icons/fa';
 import PropertyCard from '@/components/PropertyCard';
+
+const OceanBackground = dynamic(() => import('@/components/OceanBackground'), {
+  ssr: false,
+});
+
+const WaterSphere = dynamic(() => import('@/components/WaterSphere'), {
+  ssr: false,
+});
 
 export default function Home() {
   const featuredProperties = [
@@ -55,10 +63,15 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Balitecture Inspired */}
+      {/* Hero Section with Ocean Background */}
       <section className="relative h-screen bg-gradient-to-br from-gray-900 to-black flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 opacity-30 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl">
+        <OceanBackground />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" style={{ zIndex: 1 }} />
+        <div className="relative z-10 text-center text-white px-4 max-w-4xl" style={{ zIndex: 2 }}>
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm mb-6">
+            <FaCube className="text-emerald-400" />
+            <span>WebGPU-Powered 3D Experience</span>
+          </div>
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight leading-tight">
             EXCEPTIONALLY<br />BOLD LUXURY
           </h1>
@@ -66,7 +79,7 @@ export default function Home() {
             Discover premium real estate in Zanzibar
           </p>
           <p className="text-lg text-gray-300 mb-12">
-            Secure payments in Bitcoin, Ethereum & USDC
+            Secure payments in Bitcoin, Ethereum &amp; USDC
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link
@@ -79,7 +92,7 @@ export default function Home() {
               href="/virtual-tours"
               className="inline-flex items-center justify-center gap-3 border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition"
             >
-              <FaVideo /> View 360° Tours
+              <FaCube /> Explore in 3D
             </Link>
           </div>
         </div>
@@ -97,7 +110,7 @@ export default function Home() {
             <div className="group">
               <div className="bg-gradient-to-br from-blue-400 to-blue-600 h-80 rounded-lg mb-6 flex items-center justify-center">
                 <div className="text-white text-center">
-                  <div className="text-6xl mb-4">🏠</div>
+                  <div className="text-6xl mb-4">&#127968;</div>
                   <p className="text-2xl font-bold">Luxury Properties</p>
                 </div>
               </div>
@@ -105,7 +118,7 @@ export default function Home() {
                 Premium Properties
               </h3>
               <p className="text-gray-600 mb-6 text-lg">
-                Discover our carefully curated selection of luxury villas, apartments, and beachfront properties across Zanzibar's most desirable locations.
+                Discover our carefully curated selection of luxury villas, apartments, and beachfront properties across Zanzibar&apos;s most desirable locations.
               </p>
               <Link
                 href="/properties"
@@ -115,25 +128,26 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Card 2 */}
-            <div className="group">
-              <div className="bg-gradient-to-br from-purple-400 to-purple-600 h-80 rounded-lg mb-6 flex items-center justify-center">
-                <div className="text-white text-center">
-                  <div className="text-6xl mb-4">📹</div>
-                  <p className="text-2xl font-bold">360° Virtual Tours</p>
+            {/* Card 2 - 3D Tours */}
+            <div className="group relative overflow-hidden">
+              <div className="relative bg-gradient-to-br from-emerald-900 to-teal-800 h-80 rounded-lg mb-6 flex items-center justify-center">
+                <WaterSphere />
+                <div className="relative z-10 text-white text-center">
+                  <FaCube className="text-6xl mb-4 mx-auto" />
+                  <p className="text-2xl font-bold">3D Virtual Tours</p>
                 </div>
               </div>
               <h3 className="text-4xl font-bold text-gray-900 mb-3">
-                360° Virtual Tours
+                Interactive 3D Tours
               </h3>
               <p className="text-gray-600 mb-6 text-lg">
-                Explore every unit type with immersive 360° virtual tours. View Lagoon Suites, 1-Bedroom Villas, 2-Bedroom Villas, and Hotel Suites from anywhere.
+                Explore every unit type with immersive 3D models powered by WebGPU. Walk through Lagoon Suites, Villas, and Hotel Suites from anywhere.
               </p>
               <Link
                 href="/virtual-tours"
-                className="inline-flex items-center gap-2 font-bold text-lg text-gray-900 hover:gap-4 transition"
+                className="inline-flex items-center gap-2 font-bold text-lg text-emerald-600 hover:gap-4 transition"
               >
-                View Virtual Tours <FaArrowRight />
+                <FaCube /> Explore in 3D <FaArrowRight />
               </Link>
             </div>
           </div>
@@ -149,13 +163,13 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
-              { step: '1', title: 'Choose Your Property', description: 'Find the perfect unit from our premium collection', icon: '🏠' },
-              { step: '2', title: 'Initial Deposit', description: 'Secure with just 20% down payment', icon: '💰' },
-              { step: '3', title: 'Construction Payments', description: '4 x 20% payments during construction', icon: '🏗️' },
-              { step: '4', title: 'Enjoy Your Investment', description: 'Rental income or personal use', icon: '🎉' },
+              { step: '1', title: 'Choose Your Property', description: 'Find the perfect unit from our premium collection', icon: '&#127968;' },
+              { step: '2', title: 'Initial Deposit', description: 'Secure with just 20% down payment', icon: '&#128176;' },
+              { step: '3', title: 'Construction Payments', description: '4 x 20% payments during construction', icon: '&#127959;' },
+              { step: '4', title: 'Enjoy Your Investment', description: 'Rental income or personal use', icon: '&#127881;' },
             ].map((item) => (
               <div key={item.step} className="bg-white p-8 rounded-lg shadow">
-                <div className="text-5xl mb-4">{item.icon}</div>
+                <div className="text-5xl mb-4" dangerouslySetInnerHTML={{ __html: item.icon }} />
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">STEP {item.step}</h3>
                 <h4 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h4>
                 <p className="text-gray-600">{item.description}</p>
@@ -198,21 +212,21 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
-              <div className="text-5xl mb-6">🌴</div>
+              <div className="text-5xl mb-6">&#127796;</div>
               <h3 className="text-2xl font-bold mb-4">Paradise Location</h3>
               <p className="text-gray-300 text-lg">
                 Pristine beaches, turquoise waters, and a tropical climate make Zanzibar the perfect destination for luxury living and investment.
               </p>
             </div>
             <div>
-              <div className="text-5xl mb-6">💎</div>
+              <div className="text-5xl mb-6">&#128142;</div>
               <h3 className="text-2xl font-bold mb-4">Investment Growth</h3>
               <p className="text-gray-300 text-lg">
                 Strong rental yields, growing tourism, and increasing property values make Zanzibar an excellent investment opportunity.
               </p>
             </div>
             <div>
-              <div className="text-5xl mb-6">🔐</div>
+              <div className="text-5xl mb-6">&#128274;</div>
               <h3 className="text-2xl font-bold mb-4">Crypto Security</h3>
               <p className="text-gray-300 text-lg">
                 Transparent smart contracts and blockchain verification ensure secure transactions in Bitcoin, Ethereum, and USDC.
@@ -236,7 +250,7 @@ export default function Home() {
               href="/virtual-tours"
               className="inline-flex items-center justify-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-800 transition"
             >
-              <FaVideo /> Explore Virtual Tours
+              <FaCube /> Explore 3D Tours
             </Link>
             <Link
               href="/contact"
